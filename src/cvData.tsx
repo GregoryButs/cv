@@ -11,6 +11,20 @@ export interface ProjectLink {
   url: string;
 }
 
+/** Kerncijfers van een project — getoond als cijferstrook onder het project. */
+export interface Stat {
+  waarde: number;
+  achtervoegsel?: string;
+  label: string;
+}
+
+export const STATS: Stat[] = [
+  { waarde: 423, label: 'xUnit-tests' },
+  { waarde: 177, label: 'Vitest-tests' },
+  { waarde: 90, achtervoegsel: '%+', label: 'testdekking' },
+  { waarde: 50, label: 'threads stress test' },
+];
+
 export interface Project {
   title: string;
   meta: string;
@@ -19,6 +33,8 @@ export interface Project {
   description: string;
   bullets: ReactNode[];
   links: ProjectLink[];
+  /** Optionele cijferstrook; alleen zinvol bij een project met harde metrics. */
+  stats?: Stat[];
 }
 
 export interface Experience {
@@ -84,6 +100,7 @@ export const PRIMARY_PROJECTS: Project[] = [
       { label: '🌐 deverstandhouding.be ↗', url: 'https://www.deverstandhouding.be' },
       { label: '📁 GitHub Repository ↗', url: 'https://github.com/GregoryButs' },
     ],
+    stats: STATS,
   },
 ];
 
@@ -155,20 +172,6 @@ export const FOCUS_AREAS: FocusArea[] = [
 export const SHOWCASE_URL = 'https://gregorybuts.github.io/de-verstandhouding-showcase/';
 export const GITHUB_URL = 'https://github.com/GregoryButs';
 
-
-/** Kerncijfers — de "principal facts"-rij in het venster-ontwerp (v2). */
-export interface Stat {
-  waarde: number;
-  achtervoegsel?: string;
-  label: string;
-}
-
-export const STATS: Stat[] = [
-  { waarde: 423, label: 'xUnit-tests' },
-  { waarde: 177, label: 'Vitest-tests' },
-  { waarde: 90, achtervoegsel: '%+', label: 'testdekking' },
-  { waarde: 50, label: 'threads stress test' },
-];
 
 /** Contactgegevens die in beide ontwerpen terugkomen. */
 export const EMAIL = 'buts0038@gmail.com';

@@ -23,7 +23,6 @@ import {
   SECONDARY_PROJECTS,
   SHOWCASE_URL,
   SKILLS,
-  STATS,
   type Project,
 } from '../cvData';
 import { MaskedPhone } from '../MaskedPhone';
@@ -61,6 +60,20 @@ function ProjectBlok({ project }: { project: Project }) {
           <li key={i}>{bullet}</li>
         ))}
       </ul>
+
+      {project.stats && (
+        <div className="v2-stats">
+          {project.stats.map((stat) => (
+            <div key={stat.label} className="v2-stat">
+              <span className="v2-stat-waarde" data-waarde={stat.waarde} data-achtervoegsel={stat.achtervoegsel ?? ''}>
+                {stat.waarde}
+                {stat.achtervoegsel ?? ''}
+              </span>
+              <span className="v2-stat-label">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
       {project.links.length > 0 && (
         <div className="v2-knoppen">
@@ -154,17 +167,6 @@ export default function AppV2() {
               kloppen; die reflex gebruik ik nu in code, databases en architectuur.
             </p>
 
-            <div className="v2-stats">
-              {STATS.map((stat) => (
-                <div key={stat.label} className="v2-stat">
-                  <span className="v2-stat-waarde" data-waarde={stat.waarde} data-achtervoegsel={stat.achtervoegsel ?? ''}>
-                    {stat.waarde}
-                    {stat.achtervoegsel ?? ''}
-                  </span>
-                  <span className="v2-stat-label">{stat.label}</span>
-                </div>
-              ))}
-            </div>
           </section>
 
           <section id="projecten" className="v2-sectie">

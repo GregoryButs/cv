@@ -26,6 +26,13 @@
   --color-white: #ffffff;
 
   --shadow-page: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+
+  /* Verticaal ritme — één schaal, zodat de witruimte overal hetzelfde ademt. */
+  --ruimte-1: 8px;
+  --ruimte-2: 15px;
+  --ruimte-3: 24px;
+  --ruimte-4: 34px;
+  --ruimte-5: 48px;
 }
 
 ::selection {
@@ -233,10 +240,10 @@ a {
       transparent 3px,
       rgba(0, 0, 0, 0.03) 3px,
       rgba(0, 0, 0, 0.03) 4px);
-  padding: 38px 22px 44px;
+  padding: 42px 24px 48px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: var(--ruimte-4);
   color: #111827;
   height: 100%;
   box-sizing: border-box;
@@ -266,13 +273,14 @@ a {
 
 .sidebar-section-heading {
   font-family: var(--font-heading);
-  font-size: 14.5px;
+  font-size: 17px;
   font-weight: 900;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.13em;
+  line-height: 1.2;
   text-transform: uppercase;
   color: var(--color-black);
-  margin-bottom: 14px;
-  padding-bottom: 4px;
+  margin-bottom: 18px;
+  padding-bottom: 7px;
   border-bottom: 1.5px solid rgba(0, 0, 0, 0.18);
 }
 
@@ -280,7 +288,7 @@ a {
 .edu-group {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 17px;
 }
 
 .edu-block {
@@ -365,7 +373,7 @@ a {
 .skills-slider-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
 }
 
 .skill-slider-row {
@@ -404,7 +412,7 @@ a {
 .lang-pill-list {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  gap: 12px;
   font-size: 12px;
 }
 
@@ -474,10 +482,10 @@ a {
 /* ------------------------------------------------------------------------- */
 .main-white {
   background: var(--color-white);
-  padding: 38px 44px 44px;
+  padding: 44px 48px 48px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: var(--ruimte-5);
 }
 
 .main-white.page-2-main {
@@ -485,21 +493,34 @@ a {
 }
 
 .main-section-title {
+  position: relative;
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 22px;
   font-weight: 900;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.13em;
+  line-height: 1.15;
   text-transform: uppercase;
   color: var(--color-black);
-  margin-bottom: 14px;
-  border-bottom: 1.5px solid var(--color-border);
-  padding-bottom: 6px;
+  margin-bottom: var(--ruimte-3);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 12px;
+}
+
+/* Korte accentstreep die de doorlopende hairline verankert. */
+.main-section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 54px;
+  height: 2px;
+  background: var(--color-terracotta-dark);
 }
 
 /* About Me */
 .about-text {
-  font-size: 12.5px;
-  line-height: 1.75;
+  font-size: 13px;
+  line-height: 1.8;
   color: var(--color-dark);
 }
 
@@ -512,18 +533,18 @@ a {
 .entry-list {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 38px;
 }
 
 .entry-card {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 .entry-heading {
   font-family: var(--font-heading);
-  font-size: 13.5px;
+  font-size: 15.5px;
   font-weight: 800;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -863,8 +884,37 @@ a {
   }
 
   .main-white {
-    padding: 28px 30px 30px !important;
-    gap: 20px !important;
+    padding: 30px 34px 32px !important;
+    gap: 30px !important;
+  }
+
+  /* In print mag de regelafstand iets strakker; dat betaalt de grotere
+     titels terug zonder dat de bladspiegel benauwd wordt. */
+  .about-text {
+    line-height: 1.6 !important;
+  }
+
+  .bullet-list {
+    gap: 4px !important;
+  }
+
+  .bullet-list li {
+    line-height: 1.5 !important;
+  }
+
+  .main-section-title {
+    font-size: 17px !important;
+    margin-bottom: 17px !important;
+    padding-bottom: 9px !important;
+  }
+
+  .sidebar-section-heading {
+    font-size: 14.5px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .entry-list {
+    gap: 30px !important;
   }
 
   .photo-arch-frame {
