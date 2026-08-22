@@ -689,6 +689,23 @@ a {
   height: 14px;
 }
 
+.versie-link {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #f3f4f6;
+  padding: 6px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.versie-link:hover {
+  color: var(--color-terracotta);
+  border-color: var(--color-terracotta);
+}
+
 /* ========================================================================= */
 /* REDUCED MOTION                                                            */
 /* ========================================================================= */

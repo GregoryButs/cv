@@ -1,0 +1,727 @@
+/* ===========================================================================
+   CV v2 — "venster"-ontwerp: een vast paneel op een donkere achtergrond, met
+   een icoonrail, een fotopaneel dat buiten het venster steekt en één kolom
+   die intern scrollt. Concept geïnspireerd op een Webflow-template; palet,
+   typografie en inhoud zijn eigen werk (terracotta i.p.v. rood).
+   =========================================================================== */
+
+:root {
+  --v2-font-kop: 'Montserrat', sans-serif;
+  --v2-font-tekst: 'Plus Jakarta Sans', sans-serif;
+
+  --v2-achtergrond: #0f1414;
+  --v2-paneel: #1c1e1f;
+  --v2-paneel-diep: #232628;
+  --v2-lijn: rgba(255, 255, 255, 0.08);
+
+  --v2-wit: #ffffff;
+  --v2-grijs: #8d8e8f;
+  --v2-accent: #d62222;
+  --v2-accent-fel: #f13a3a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--v2-achtergrond);
+  /* Diagonale strepen, volledig in CSS — geen externe assets. */
+  background-image:
+    repeating-linear-gradient(115deg,
+      rgba(255, 255, 255, 0.035) 0px,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 90px),
+    repeating-linear-gradient(115deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 2px,
+      transparent 2px,
+      transparent 220px),
+    radial-gradient(120% 90% at 50% 0%, #182020 0%, var(--v2-achtergrond) 60%);
+  color: var(--v2-wit);
+  font-family: var(--v2-font-tekst);
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--v2-accent);
+  color: #ffffff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------- */
+/* Het venster                                                                 */
+/* --------------------------------------------------------------------------- */
+.v2-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 48px 28px;
+}
+
+.v2-window {
+  position: relative;
+  width: min(1180px, 100%);
+  height: min(760px, calc(100vh - 96px));
+  display: grid;
+  grid-template-columns: 84px 400px 1fr;
+  background: var(--v2-paneel);
+  box-shadow: 0 50px 120px rgba(0, 0, 0, 0.65);
+}
+
+/* --------------------------------------------------------------------------- */
+/* Icoonrail                                                                   */
+/* --------------------------------------------------------------------------- */
+.v2-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding: 30px 0;
+  border-right: 1px solid var(--v2-lijn);
+}
+
+.v2-monogram {
+  font-family: var(--v2-font-kop);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  color: var(--v2-accent);
+}
+
+.v2-rail ul {
+  list-style: none;
+  margin: auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.v2-rail-knop {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  color: rgba(245, 243, 241, 0.35);
+  cursor: pointer;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.v2-rail-knop svg {
+  width: 19px;
+  height: 19px;
+}
+
+.v2-rail-knop:hover {
+  color: var(--v2-wit);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.v2-rail-knop.is-actief {
+  color: var(--v2-accent);
+  background: rgba(214, 34, 34, 0.14);
+}
+
+.v2-rail-versie {
+  font-family: var(--v2-font-kop);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--v2-grijs);
+  border: 1px solid var(--v2-lijn);
+  border-radius: 999px;
+  padding: 4px 9px;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.v2-rail-versie:hover {
+  color: var(--v2-accent);
+  border-color: var(--v2-accent);
+}
+
+/* --------------------------------------------------------------------------- */
+/* Fotopaneel — steekt boven en onder buiten het venster                       */
+/* --------------------------------------------------------------------------- */
+.v2-foto {
+  position: relative;
+  margin: -34px 0;
+  background: var(--v2-paneel-diep);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.v2-foto-beeld {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.v2-foto-beeld img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85) contrast(1.05);
+}
+
+.v2-foto-fallback {
+  width: 120px;
+  height: 120px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.v2-foto-kaart {
+  position: relative;
+  padding: 34px 32px 46px;
+  background: linear-gradient(to top, rgba(15, 20, 20, 0.95) 45%, transparent);
+}
+
+.v2-naam {
+  font-family: var(--v2-font-kop);
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0 0 6px;
+  color: var(--v2-wit);
+}
+
+.v2-naam span {
+  color: var(--v2-accent);
+}
+
+.v2-rol {
+  margin: 0 0 18px;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  color: var(--v2-grijs);
+}
+
+.v2-sociaal {
+  display: flex;
+  gap: 14px;
+}
+
+.v2-sociaal a {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--v2-lijn);
+  border-radius: 50%;
+  color: var(--v2-wit);
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.v2-sociaal a svg {
+  width: 15px;
+  height: 15px;
+}
+
+.v2-sociaal a:hover {
+  color: var(--v2-accent);
+  border-color: var(--v2-accent);
+}
+
+/* --------------------------------------------------------------------------- */
+/* Scrollende inhoudskolom                                                     */
+/* --------------------------------------------------------------------------- */
+.v2-kolom {
+  overflow-y: auto;
+  padding: 46px 52px 60px;
+  /* Inhoud vervaagt aan de randen in plaats van hard af te snijden. */
+  mask-image: linear-gradient(to bottom, transparent 0, #000 34px, #000 calc(100% - 46px), transparent 100%);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(214, 34, 34, 0.55) transparent;
+}
+
+.v2-kolom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.v2-kolom::-webkit-scrollbar-thumb {
+  background: rgba(214, 34, 34, 0.55);
+  border-radius: 999px;
+}
+
+.v2-sectie {
+  padding-bottom: 42px;
+  margin-bottom: 42px;
+  border-bottom: 1px solid var(--v2-lijn);
+}
+
+.v2-sectie-laatst {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.v2-titel {
+  font-family: var(--v2-font-kop);
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+  color: var(--v2-wit);
+}
+
+.v2-kruimels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 0;
+  margin: 0 0 20px;
+  font-style: italic;
+  color: var(--v2-accent);
+  font-size: 13px;
+}
+
+.v2-kruimels span + span::before {
+  content: '/';
+  margin: 0 12px;
+  color: var(--v2-grijs);
+  font-style: normal;
+}
+
+.v2-tekst {
+  margin: 0 0 12px;
+  color: var(--v2-grijs);
+}
+
+.v2-tekst-groot {
+  font-size: 14.5px;
+  line-height: 1.8;
+}
+
+.v2-tekst strong {
+  color: var(--v2-wit);
+  font-weight: 600;
+}
+
+.v2-meta {
+  font-family: var(--v2-font-kop);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--v2-accent);
+  white-space: nowrap;
+}
+
+/* Kerncijfers */
+.v2-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.v2-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.v2-stat-waarde {
+  font-family: var(--v2-font-kop);
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--v2-accent);
+  line-height: 1.1;
+}
+
+.v2-stat-label {
+  font-size: 11.5px;
+  color: var(--v2-grijs);
+}
+
+/* Projecten & ervaring */
+.v2-project {
+  margin-bottom: 34px;
+}
+
+.v2-project:last-child {
+  margin-bottom: 0;
+}
+
+.v2-project-kop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 2px;
+}
+
+.v2-project-kop h4 {
+  font-family: var(--v2-font-kop);
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--v2-wit);
+}
+
+.v2-project-bedrijf {
+  margin: 0 0 12px;
+  font-size: 12px;
+  color: var(--v2-grijs);
+}
+
+.v2-stack {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 0;
+}
+
+.v2-stack li {
+  font-family: var(--v2-font-kop);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--v2-wit);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--v2-lijn);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+.v2-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.v2-bullets li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--v2-grijs);
+  line-height: 1.6;
+}
+
+.v2-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--v2-accent);
+}
+
+.v2-bullets strong,
+.v2-bullets em {
+  color: var(--v2-wit);
+}
+
+.v2-knoppen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.v2-knop {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--v2-font-kop);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--v2-accent);
+  border: 1px solid var(--v2-accent);
+  padding: 8px 14px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.v2-knop svg {
+  width: 13px;
+  height: 13px;
+}
+
+.v2-knop:hover {
+  background: var(--v2-accent);
+  color: #ffffff;
+}
+
+/* Opleiding, vaardigheden, talen */
+.v2-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+}
+
+.v2-edu {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.v2-edu-titel {
+  font-family: var(--v2-font-kop);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--v2-wit);
+}
+
+.v2-edu .v2-meta {
+  color: var(--v2-accent);
+  margin-bottom: 2px;
+}
+
+.v2-vaardigheden {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  margin-bottom: 30px;
+}
+
+.v2-vaardigheid > span {
+  font-family: var(--v2-font-kop);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--v2-wit);
+}
+
+.v2-balk {
+  margin-top: 8px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  position: relative;
+  overflow: hidden;
+}
+
+.v2-balk-vulling {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8f1717, var(--v2-accent));
+}
+
+.v2-talen {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.v2-taal {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--v2-lijn);
+  padding-bottom: 6px;
+  font-size: 12.5px;
+}
+
+/* Contact */
+.v2-contact {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.v2-contact li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--v2-grijs);
+}
+
+.v2-contact svg {
+  width: 16px;
+  height: 16px;
+  color: var(--v2-accent);
+  flex-shrink: 0;
+}
+
+.v2-contact a:hover {
+  color: var(--v2-accent);
+}
+
+/* Sterretjes-component (MaskedPhone) — basisstijlen, want v2 laadt de
+   v1-stylesheet niet. */
+.phone-mask {
+  font: inherit;
+  color: var(--v2-grijs);
+  letter-spacing: 0.06em;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.phone-star {
+  display: inline-block; /* nodig om te kunnen schalen */
+}
+
+.v2-contact .phone-mask {
+  color: var(--v2-grijs);
+}
+
+.v2-contact .phone-mask:hover {
+  color: var(--v2-accent);
+}
+
+/* --------------------------------------------------------------------------- */
+/* Smal scherm: het venster wordt een gewone, doorlopende pagina               */
+/* --------------------------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .v2-shell {
+    padding: 0;
+  }
+
+  .v2-window {
+    width: 100%;
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .v2-rail {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--v2-lijn);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--v2-paneel);
+  }
+
+  .v2-rail ul {
+    flex-direction: row;
+    margin: 0;
+  }
+
+  .v2-foto {
+    margin: 0;
+    min-height: 460px;
+  }
+
+  .v2-kolom {
+    overflow: visible;
+    padding: 34px 24px 60px;
+  }
+
+  .v2-duo,
+  .v2-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Zonder scheidingstekens breekt de kruimelregel netjes af. */
+  .v2-kruimels {
+    gap: 4px 16px;
+  }
+
+  .v2-kruimels span + span::before {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------- */
+/* Print: het venster vouwt open tot een gewoon, licht document                */
+/* --------------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #1f2937 !important;
+    font-size: 10pt;
+  }
+
+  .v2-kolom {
+    mask-image: none !important;
+  }
+
+  .v2-shell,
+  .v2-window,
+  .v2-kolom,
+  .v2-foto {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .v2-window * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .v2-rail,
+  .v2-foto-beeld,
+  .v2-sociaal {
+    display: none !important;
+  }
+
+  .v2-naam,
+  .v2-titel,
+  .v2-project-kop h4,
+  .v2-edu-titel,
+  .v2-tekst strong,
+  .v2-stack li {
+    color: #111827 !important;
+  }
+
+  .v2-tekst,
+  .v2-bullets li,
+  .v2-stat-label,
+  .v2-project-bedrijf,
+  .v2-contact li {
+    color: #374151 !important;
+  }
+
+  .v2-sectie {
+    break-inside: avoid;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .v2-knoppen {
+    display: none !important;
+  }
+}
