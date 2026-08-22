@@ -1,0 +1,810 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================================== */
+/* Editorial Terracotta CV — gelijkgehouden met                                */
+/* CV/standalone/gregory-buts-cv.html (bron van waarheid voor het design).     */
+/* Wijzig het design daar en spiegel het hier terug.                           */
+/* =========================================================================== */
+
+:root {
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+
+  /* Editorial Terracotta Palette */
+  --color-terracotta: #d5a48e;
+  --color-terracotta-dark: #b87e65;
+  --color-terracotta-light: #fbf5f2;
+  --color-terracotta-border: #ebd5cb;
+
+  --color-black: #111827;
+  --color-dark: #1f2937;
+  --color-gray: #4b5563;
+  --color-light-gray: #6b7280;
+  --color-border: #e5e7eb;
+  --color-white: #ffffff;
+
+  --shadow-page: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+}
+
+::selection {
+  background: var(--color-terracotta);
+  color: #ffffff;
+}
+
+body {
+  background: #c2ccd8 radial-gradient(100% 70% at 50% 0%, #b4c0ce 0%, #cbd4de 100%);
+  color: var(--color-dark);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+/* React mount-punt neemt de centrering over die de statische HTML op body legt */
+#root {
+  min-height: 100vh;
+  padding: 40px 16px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+/* Fixed A4 Page Containers (Screen & Print Perfect) */
+.cv-page {
+  width: 100%;
+  max-width: 920px;
+  min-height: 1280px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-page);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========================================================================= */
+/* 1. TOP HEADER (PAGE 1)                                                    */
+/* ========================================================================= */
+.header-banner {
+  background: var(--color-white);
+  padding: 38px 40px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.name-title {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-black);
+}
+
+.name-title .surname-accent {
+  color: var(--color-terracotta-dark);
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+.name-subtitle {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  margin-top: 4px;
+}
+
+/* ========================================================================= */
+/* 2. CONTACT STRIP (PAGE 1)                                                 */
+/* ========================================================================= */
+.contact-strip {
+  background: var(--color-black);
+  color: #f3f4f6;
+  padding: 12px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px 28px;
+  font-size: 11.5px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.contact-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-entry svg {
+  width: 13.5px;
+  height: 13.5px;
+  color: var(--color-terracotta);
+  flex-shrink: 0;
+}
+
+.contact-entry a:hover {
+  color: var(--color-terracotta);
+  text-decoration: underline;
+}
+
+.contact-entry a.showcase-highlight {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+/* Telefoonnummer achter sterretjes (zie MaskedPhone.tsx) */
+.phone-mask {
+  font: inherit;
+  color: inherit;
+  letter-spacing: 0.06em;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.phone-mask:hover,
+.phone-mask:focus-visible {
+  color: var(--color-terracotta);
+}
+
+.phone-star {
+  display: inline-block; /* nodig om te kunnen schalen */
+}
+
+/* ========================================================================= */
+/* 3. SPLIT BODY GRID (RUNS FULL HEIGHT ON BOTH PAGES)                       */
+/* ========================================================================= */
+.body-split-wrapper {
+  display: grid;
+  grid-template-columns: 28px 285px 1fr;
+  flex: 1;
+  background: var(--color-white);
+}
+
+.body-split-wrapper.full-height {
+  height: 100%;
+}
+
+.left-white-margin {
+  background: var(--color-white);
+}
+
+/* ------------------------------------------------------------------------- */
+/* TERRACOTTA SIDEBAR (PAGE 1 & PAGE 2)                                      */
+/* ------------------------------------------------------------------------- */
+.sidebar-terracotta {
+  background-color: var(--color-terracotta);
+  background-image: repeating-linear-gradient(90deg,
+      transparent,
+      transparent 3px,
+      rgba(0, 0, 0, 0.03) 3px,
+      rgba(0, 0, 0, 0.03) 4px);
+  padding: 38px 22px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  color: #111827;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Page 1 Sidebar: Perfectly Centered Photo Frame & Symmetrical Ends */
+.page-1-sidebar {
+  justify-content: space-between !important;
+  padding: 76px 22px !important;
+  gap: 0 !important;
+}
+
+.page-1-sidebar .sidebar-top-block {
+  margin-bottom: 0;
+}
+
+.page-1-sidebar .photo-arch-container {
+  margin: auto 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-1-sidebar .sidebar-bottom-block {
+  margin-top: 0;
+}
+
+.sidebar-section-heading {
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  margin-bottom: 14px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.18);
+}
+
+/* Education */
+.edu-group {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.edu-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.edu-degree-title {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  line-height: 1.35;
+}
+
+.edu-period {
+  font-size: 11px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.edu-institution {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+/* Stadium / Capsule Oval Photo Frame (Larger & Closer) */
+.photo-arch-container {
+  display: flex;
+  justify-content: center;
+}
+
+.photo-arch-frame {
+  width: 175px;
+  height: 235px;
+  border-radius: 9999px;
+  border: 5px solid var(--color-white);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  background: #e2c0b0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.photo-arch-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-arch-frame svg {
+  width: 65px;
+  height: 65px;
+  color: var(--color-white);
+  opacity: 0.85;
+}
+
+/* Skills Slider */
+.skills-slider-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skill-slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+}
+
+.skill-slider-label {
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.skill-track {
+  width: 100%;
+  height: 1.5px;
+  background: #111827;
+  position: relative;
+  margin: 3px 0;
+}
+
+.skill-track-dot {
+  position: absolute;
+  top: -4px;
+  left: var(--dot-left, 0%);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--color-black);
+  border: 1.5px solid var(--color-terracotta);
+}
+
+/* Languages List */
+.lang-pill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 12px;
+}
+
+.lang-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: 3px;
+}
+
+.lang-row .name {
+  font-weight: 700;
+  color: var(--color-black);
+  font-size: 12.5px;
+}
+
+.lang-row .level {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Focus & Highlights (Page 2 Sidebar) */
+.sidebar-focus-card {
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+.sidebar-focus-card + .sidebar-focus-card {
+  margin-top: 10px;
+}
+
+.sidebar-focus-card strong {
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  color: var(--color-black);
+  letter-spacing: 0.04em;
+}
+
+/* Portfolio & Code (Page 2 Sidebar) */
+.sidebar-portfolio-list {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #1f2937;
+}
+
+.sidebar-portfolio-list > div + div {
+  margin-top: 4px;
+}
+
+.sidebar-portfolio-list a {
+  color: #0369a1;
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------------- */
+/* RIGHT COLUMN: PURE WHITE MAIN CONTENT                                     */
+/* ------------------------------------------------------------------------- */
+.main-white {
+  background: var(--color-white);
+  padding: 38px 44px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.main-white.page-2-main {
+  padding-top: 44px;
+}
+
+.main-section-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  margin-bottom: 14px;
+  border-bottom: 1.5px solid var(--color-border);
+  padding-bottom: 6px;
+}
+
+/* About Me */
+.about-text {
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--color-dark);
+}
+
+.about-text strong {
+  color: var(--color-black);
+  font-weight: 700;
+}
+
+/* Entry Cards */
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.entry-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.entry-heading {
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.entry-meta {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-terracotta-dark);
+  letter-spacing: 0.02em;
+}
+
+.entry-subtitle {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--color-gray);
+  margin-bottom: 4px;
+}
+
+/* Tech Pills */
+.tech-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.tech-pill {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  color: #374151;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  padding: 2.5px 7.5px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.entry-description {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--color-dark);
+  margin-bottom: 4px;
+}
+
+.bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 4px 0 0;
+  padding: 0;
+  font-size: 12.5px;
+}
+
+.bullet-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  line-height: 1.6;
+  color: var(--color-dark);
+}
+
+.bullet-dash {
+  color: var(--color-terracotta-dark);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.action-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-heading);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3.5px 10px;
+  border-radius: 3px;
+  background: #fdfaf8;
+  border: 1px solid #e8d5cc;
+  color: var(--color-black);
+  transition: all 0.15s ease;
+}
+
+.action-link:hover {
+  background: var(--color-terracotta);
+  color: #ffffff;
+  border-color: var(--color-terracotta);
+}
+
+/* Floating Toolbar */
+.floating-toolbar {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(17, 24, 39, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.btn-print {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-terracotta);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(213, 164, 142, 0.5);
+  transition: all 0.2s ease;
+}
+
+.btn-print:hover {
+  background: var(--color-terracotta-dark);
+  transform: translateY(-1px);
+}
+
+/* Press feedback: kort en subtiel (160ms), zie finding-animation-opportunities */
+.btn-print:active {
+  transform: scale(0.97);
+  transition: transform 160ms ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .action-link:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.action-link:active {
+  transform: scale(0.98);
+}
+
+.btn-print svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ========================================================================= */
+/* REDUCED MOTION                                                            */
+/* ========================================================================= */
+/* De GSAP-sequentie wordt al overgeslagen via gsap.matchMedia(); dit dekt de
+   pure CSS-transities af. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .btn-print:hover,
+  .btn-print:active,
+  .action-link:hover,
+  .action-link:active {
+    transform: none;
+  }
+}
+
+/* ========================================================================= */
+/* STRICT PRINT STYLESHEET (PERFECT 2-PAGE PRINT FLOW)                       */
+/* ========================================================================= */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.5 !important;
+    display: block !important;
+  }
+
+  #root {
+    padding: 0 !important;
+    margin: 0 !important;
+    gap: 0 !important;
+    display: block !important;
+    min-height: 0 !important;
+  }
+
+  .floating-toolbar,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Vangnet voor GSAP: inline opacity/transform van een lopende of nog niet
+     getriggerde animatie mag nooit in de PDF terechtkomen. */
+  .header-banner,
+  .header-banner > *,
+  .contact-strip,
+  .contact-entry,
+  .sidebar-terracotta,
+  .sidebar-terracotta > div,
+  .edu-block,
+  .photo-arch-frame,
+  .main-white,
+  .main-white > section {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .skill-track-dot {
+    left: var(--dot-left, 0%) !important;
+    opacity: 1 !important;
+  }
+
+  /* Sterretjes mogen nooit halverwege een twinkel in de PDF belanden. */
+  .phone-star,
+  .phone-value {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .cv-page {
+    width: 210mm !important;
+    height: 297mm !important;
+    max-width: none !important;
+    min-height: 297mm !important;
+    max-height: 297mm !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .header-banner {
+    padding: 26px 30px 16px !important;
+  }
+
+  .name-title {
+    font-size: 24pt !important;
+  }
+
+  .contact-strip {
+    padding: 8px 24px !important;
+    background: #111827 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .body-split-wrapper {
+    grid-template-columns: 20px 240px 1fr !important;
+    height: 100% !important;
+  }
+
+  .sidebar-terracotta {
+    padding: 26px 16px 30px !important;
+    gap: 20px !important;
+    background-color: #d5a48e !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    height: 100% !important;
+  }
+
+  .page-1-sidebar {
+    padding: 55px 16px !important;
+  }
+
+  .main-white {
+    padding: 28px 30px 30px !important;
+    gap: 20px !important;
+  }
+
+  .photo-arch-frame {
+    width: 148px !important;
+    height: 200px !important;
+  }
+
+  .tech-pill {
+    background: #f3f4f6 !important;
+    border-color: #e5e7eb !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .body-split-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .left-white-margin {
+    display: none;
+  }
+
+  .contact-strip {
+    justify-content: flex-start;
+  }
+}
