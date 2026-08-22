@@ -43,9 +43,12 @@ body {
   margin: 0;
 }
 
-/* React mount-punt neemt de centrering over die de statische HTML op body legt */
+/* React mount-punt neemt de centrering over die de statische HTML op body legt. */
 #root {
   min-height: 100vh;
+}
+
+.cv-canvas {
   padding: 40px 16px 80px;
   display: flex;
   flex-direction: column;
@@ -95,6 +98,15 @@ a {
   color: var(--color-black);
 }
 
+.name-title {
+  cursor: pointer;
+}
+
+.naam-char {
+  display: inline-block;
+  will-change: transform;
+}
+
 .name-title .surname-accent {
   color: var(--color-terracotta-dark);
   font-weight: 700;
@@ -115,6 +127,8 @@ a {
 /* 2. CONTACT STRIP (PAGE 1)                                                 */
 /* ========================================================================= */
 .contact-strip {
+  position: relative;
+  overflow: hidden;
   background: var(--color-black);
   color: #f3f4f6;
   padding: 12px 32px;
@@ -129,7 +143,26 @@ a {
   letter-spacing: 0.03em;
 }
 
+/* Spotlight die de cursor volgt (zie animations/pointer.ts) */
+.contact-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(240px circle at var(--spot-x, -999px) var(--spot-y, -999px),
+      rgba(213, 164, 142, 0.3),
+      transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.contact-strip:hover::before {
+  opacity: 1;
+}
+
 .contact-entry {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -298,6 +331,21 @@ a {
   position: relative;
 }
 
+.photo-arch-frame svg.photo-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.photo-ring rect {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 3;
+}
+
 .photo-arch-frame img {
   width: 100%;
   height: 100%;
@@ -305,7 +353,8 @@ a {
   display: block;
 }
 
-.photo-arch-frame svg {
+/* Alleen het fallback-icoon, niet de getekende ring. */
+.photo-arch-frame > svg:not(.photo-ring) {
   width: 65px;
   height: 65px;
   color: var(--color-white);
@@ -703,20 +752,33 @@ a {
     display: none !important;
   }
 
-  /* Vangnet voor GSAP: inline opacity/transform van een lopende of nog niet
-     getriggerde animatie mag nooit in de PDF terechtkomen. */
-  .header-banner,
-  .header-banner > *,
-  .contact-strip,
-  .contact-entry,
-  .sidebar-terracotta,
-  .sidebar-terracotta > div,
-  .edu-block,
-  .photo-arch-frame,
-  .main-white,
-  .main-white > section {
+  /* Vangnet voor GSAP: inline styles van een lopende of nog niet getriggerde
+     animatie mogen nooit in de PDF terechtkomen. Breed opgezet, want de
+     animatielaag raakt opacity, transform, clip-path én SVG-strokes aan. */
+  .cv-page,
+  .cv-page * {
     opacity: 1 !important;
     transform: none !important;
+    clip-path: none !important;
+    filter: none !important;
+  }
+
+  .photo-ring rect {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  /* In print moet de pagina gewoon weer normaal doorlopen. */
+  #root,
+  .cv-canvas {
+    position: static !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    display: block !important;
   }
 
   .skill-track-dot {
@@ -729,6 +791,12 @@ a {
   .phone-value {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* Zonder dit forceert de laatste pagina een lege derde pagina. */
+  .cv-page:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
   }
 
   .cv-page {

@@ -229,6 +229,9 @@ function ProfilePhoto() {
   return (
     <div className="photo-arch-container">
       <div className="photo-arch-frame">
+        <svg className="photo-ring" viewBox="0 0 175 235" aria-hidden="true">
+          <rect x="4" y="4" width="167" height="227" rx="83.5" ry="83.5" />
+        </svg>
         {photoFailed ? (
           <User />
         ) : (
@@ -251,7 +254,7 @@ function PageOne() {
   return (
     <div className="cv-page page-one">
       <header className="header-banner">
-        <h1 className="name-title">
+        <h1 className="name-title" title="Klik eens op mijn naam">
           <span>GREGORY</span>
           <span className="surname-accent">BUTS</span>
         </h1>
@@ -426,9 +429,7 @@ export default function App() {
   const scope = useCvAnimations();
 
   return (
-    // display:contents houdt de flex-layout van #root intact; de div dient enkel
-    // als scope-container voor GSAP (automatische cleanup via useGSAP).
-    <div ref={scope} style={{ display: 'contents' }}>
+    <div className="cv-canvas" ref={scope}>
       <div className="floating-toolbar no-print">
         <button onClick={() => window.print()} className="btn-print" title="Afdrukken of Opslaan als PDF">
           <Printer strokeWidth={2} />
