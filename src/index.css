@@ -120,6 +120,29 @@ a {
   margin-left: 8px;
 }
 
+.beschikbaarheid {
+  margin-top: 10px;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-terracotta-dark);
+  border: 1.5px solid var(--color-terracotta);
+  border-radius: 9999px;
+  padding: 4px 14px;
+}
+
+.edu-opmerking {
+  margin-top: 5px;
+  font-size: 10.5px;
+  font-style: italic;
+  line-height: 1.45;
+  color: #374151;
+  padding-left: 8px;
+  border-left: 2px solid rgba(0, 0, 0, 0.25);
+}
+
 .name-subtitle {
   font-family: var(--font-heading);
   font-size: 12px;
@@ -851,11 +874,19 @@ a {
   }
 
   .header-banner {
-    padding: 26px 30px 16px !important;
+    padding: 22px 30px 10px !important;
   }
 
   .name-title {
-    font-size: 24pt !important;
+    font-size: 22pt !important;
+  }
+
+  /* Op het scherm mag het label opvallen; in print telt elke millimeter. */
+  .beschikbaarheid {
+    margin-top: 6px !important;
+    padding: 3px 12px !important;
+    font-size: 8.5px !important;
+    border-width: 1px !important;
   }
 
   .contact-strip {
@@ -891,7 +922,7 @@ a {
   /* In print mag de regelafstand iets strakker; dat betaalt de grotere
      titels terug zonder dat de bladspiegel benauwd wordt. */
   .about-text {
-    line-height: 1.6 !important;
+    line-height: 1.55 !important;
   }
 
   .bullet-list {

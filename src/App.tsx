@@ -13,6 +13,7 @@ import {
   SECONDARY_PROJECTS,
   SHOWCASE_URL,
   SKILLS,
+  BESCHIKBAARHEID,
   type Experience,
   type Project,
 } from './cvData';
@@ -119,6 +120,7 @@ function PageOne() {
           <span className="surname-accent">BUTS</span>
         </h1>
         <div className="name-subtitle">.NET · ASP.NET Core Developer</div>
+        <div className="beschikbaarheid">{BESCHIKBAARHEID}</div>
       </header>
 
       <div className="contact-strip">
@@ -164,6 +166,7 @@ function PageOne() {
                   <div className="edu-degree-title">{edu.degree}</div>
                   <div className="edu-period">{edu.period}</div>
                   <div className="edu-institution">{edu.school}</div>
+                  {edu.opmerking && <div className="edu-opmerking">{edu.opmerking}</div>}
                 </div>
               ))}
             </div>

@@ -12,6 +12,7 @@ import {
   User,
 } from 'lucide-react';
 import {
+  BESCHIKBAARHEID,
   EDUCATION,
   EMAIL,
   EXPERIENCES,
@@ -157,7 +158,7 @@ export default function AppV2() {
             <p className="v2-kruimels">
               <span>Graduaat Programmeren</span>
               <span>{LOCATIE}</span>
-              <span>Open voor werk</span>
+              <span>{BESCHIKBAARHEID}</span>
             </p>
             <p className="v2-tekst v2-tekst-groot">
               Ik bouw backends waar je op kán bouwen. <strong>C# en ASP.NET Core</strong> zijn mijn thuisbasis — van Web
@@ -206,6 +207,7 @@ export default function AppV2() {
                     <span className="v2-edu-titel">{edu.degree}</span>
                     <span className="v2-meta">{edu.period}</span>
                     <span className="v2-tekst">{edu.school}</span>
+                    {edu.opmerking && <span className="v2-edu-opmerking">{edu.opmerking}</span>}
                   </div>
                 ))}
               </div>

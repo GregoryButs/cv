@@ -500,6 +500,16 @@ a {
   margin-bottom: 2px;
 }
 
+.v2-edu-opmerking {
+  margin-top: 6px;
+  padding-left: 12px;
+  border-left: 2px solid var(--v2-accent);
+  font-size: 12.5px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--v2-grijs);
+}
+
 .v2-vaardigheden {
   display: flex;
   flex-direction: column;

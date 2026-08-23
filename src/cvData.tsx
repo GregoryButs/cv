@@ -49,6 +49,8 @@ export interface Education {
   degree: string;
   period: string;
   school: string;
+  /** Optionele toelichting, bv. wat er nog rest van de opleiding. */
+  opmerking?: string;
 }
 
 export interface Skill {
@@ -143,7 +145,12 @@ export const EXPERIENCES: Experience[] = [
 ];
 
 export const EDUCATION: Education[] = [
-  { degree: 'Graduaat Programmeren', period: '2023 — 2026/2027', school: 'Odisee Hogeschool (Full-Stack)' },
+  {
+    degree: 'Graduaat Programmeren',
+    period: '2023 — 2026/2027',
+    school: 'Odisee Hogeschool (Full-Stack)',
+    opmerking: 'Enkel het afstudeerproject rest, uit te voeren op een programmeerwerkplek.',
+  },
   { degree: 'Bachelor Criminologie', period: '2006 — 2012', school: 'Vrije Universiteit Brussel (VUB)' },
   { degree: 'ASO Latijn — Wiskunde/Talen', period: '1999 — 2005', school: 'Koninklijk Atheneum Halle' },
 ];
@@ -177,4 +184,5 @@ export const GITHUB_URL = 'https://github.com/GregoryButs';
 export const EMAIL = 'buts0038@gmail.com';
 export const LOCATIE = 'Geraardsbergen, België';
 export const ROL = '.NET · ASP.NET Core Developer';
+export const BESCHIKBAARHEID = 'Onmiddellijk beschikbaar';
 export const SITE_URL = 'https://www.deverstandhouding.be';
