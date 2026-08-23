@@ -136,11 +136,11 @@ export const EXPERIENCES: Experience[] = [
     ],
   },
   {
-    title: 'Eerdere Professionele Ervaring',
-    meta: '2004 — 2013 (9 jaar)',
+    title: 'Studenten- en interimjobs',
+    meta: '2004 — 2013 · naast mijn studies',
     company: 'Silhouette CC · Colruyt · Vanden Borre e.a.',
     description:
-      'Klantenservice, teamcoördinatie, promotie en logistiek beheer. Basis gelegd voor sterke communicatie, verantwoordelijkheid en flexibiliteit in multidisciplinaire projectteams.',
+      'Klantenservice, teamcoördinatie, promotie en logistiek beheer, gecombineerd met voltijdse studies. Basis gelegd voor sterke communicatie, verantwoordelijkheid en flexibiliteit in multidisciplinaire teams.',
   },
 ];
 
