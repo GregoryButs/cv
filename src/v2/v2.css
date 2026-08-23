@@ -78,10 +78,10 @@ a {
 
 .v2-window {
   position: relative;
-  width: min(1180px, 100%);
+  width: min(1240px, 100%);
   height: min(760px, calc(100vh - 96px));
   display: grid;
-  grid-template-columns: 84px 400px 1fr;
+  grid-template-columns: 88px 470px 1fr;
   background: var(--v2-paneel);
   box-shadow: 0 50px 120px rgba(0, 0, 0, 0.65);
 }
@@ -116,8 +116,8 @@ a {
 }
 
 .v2-rail-knop {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   background: none;
@@ -129,8 +129,8 @@ a {
 }
 
 .v2-rail-knop svg {
-  width: 19px;
-  height: 19px;
+  width: 22px;
+  height: 22px;
 }
 
 .v2-rail-knop:hover {
@@ -148,8 +148,8 @@ a {
 .v2-rail-print {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   color: var(--v2-accent);
   background: rgba(214, 34, 34, 0.14);
   border: 1px solid rgba(214, 34, 34, 0.5);
@@ -158,8 +158,8 @@ a {
 }
 
 .v2-rail-print svg {
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
 }
 
 .v2-rail-print:hover {
@@ -239,12 +239,12 @@ a {
 .v2-sociaal {
   display: flex;
   justify-content: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .v2-sociaal a {
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border: 1px solid var(--v2-lijn);
@@ -254,8 +254,8 @@ a {
 }
 
 .v2-sociaal a svg {
-  width: 15px;
-  height: 15px;
+  width: 19px;
+  height: 19px;
 }
 
 .v2-sociaal a:hover {
@@ -296,6 +296,9 @@ a {
 }
 
 .v2-titel {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
   font-family: var(--v2-font-kop);
   font-size: 64px;
   font-weight: 800;
@@ -303,6 +306,14 @@ a {
   letter-spacing: -0.025em;
   margin: 0 0 var(--v2-ruimte-3);
   color: var(--v2-wit);
+}
+
+/* Schaalt mee met de titel: in em, dus ook op mobiel in verhouding. */
+.v2-titel-icoon {
+  width: 0.52em;
+  height: 0.52em;
+  color: var(--v2-accent);
+  flex-shrink: 0;
 }
 
 .v2-kruimels {

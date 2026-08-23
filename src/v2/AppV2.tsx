@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import {
   ArrowUpRight,
   Briefcase,
@@ -39,6 +39,18 @@ const SECTIES = [
 ] as const;
 
 const ALLE_PROJECTEN = [...PRIMARY_PROJECTS, ...SECONDARY_PROJECTS];
+
+/** Sectietitel met hetzelfde icoon als in de rail, zodat navigatie en inhoud
+ *  visueel aan elkaar gekoppeld zijn. */
+function SectieTitel({ id, children }: { id: (typeof SECTIES)[number]['id']; children: ReactNode }) {
+  const Icoon = SECTIES.find((sectie) => sectie.id === id)?.icoon;
+  return (
+    <h2 className="v2-titel">
+      {Icoon && <Icoon className="v2-titel-icoon" strokeWidth={1.7} aria-hidden="true" />}
+      <span>{children}</span>
+    </h2>
+  );
+}
 
 function ProjectBlok({ project }: { project: Project }) {
   return (
@@ -160,7 +172,7 @@ export default function AppV2() {
         {/* Scrollende inhoudskolom */}
         <div className="v2-kolom" ref={kolom}>
           <section id="over" className="v2-sectie">
-            <h2 className="v2-titel">over mij</h2>
+            <SectieTitel id="over">over mij</SectieTitel>
             <p className="v2-kruimels">
               <span>Graduaat Programmeren</span>
               <span>{LOCATIE}</span>
@@ -177,14 +189,14 @@ export default function AppV2() {
           </section>
 
           <section id="projecten" className="v2-sectie">
-            <h2 className="v2-titel">projecten</h2>
+            <SectieTitel id="projecten">projecten</SectieTitel>
             {ALLE_PROJECTEN.map((project) => (
               <ProjectBlok key={project.title} project={project} />
             ))}
           </section>
 
           <section id="ervaring" className="v2-sectie">
-            <h2 className="v2-titel">werkervaring</h2>
+            <SectieTitel id="ervaring">werkervaring</SectieTitel>
             {EXPERIENCES.map((ervaring) => (
               <article key={ervaring.title} className="v2-project">
                 <header className="v2-project-kop">
@@ -205,7 +217,7 @@ export default function AppV2() {
           </section>
 
           <section id="opleiding" className="v2-sectie">
-            <h2 className="v2-titel">opleiding &amp; talen</h2>
+            <SectieTitel id="opleiding">opleiding &amp; talen</SectieTitel>
             <div className="v2-duo">
               <div>
                 {EDUCATION.map((edu) => (
@@ -241,7 +253,7 @@ export default function AppV2() {
           </section>
 
           <section id="contact" className="v2-sectie v2-sectie-laatst">
-            <h2 className="v2-titel">contact</h2>
+            <SectieTitel id="contact">contact</SectieTitel>
             <ul className="v2-contact">
               <li>
                 <Mail strokeWidth={1.7} />
