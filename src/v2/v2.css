@@ -143,26 +143,29 @@ a {
   background: rgba(214, 34, 34, 0.14);
 }
 
+ /* Geen navigatie maar een actie: daarom accentkleur en een gevulde achtergrond,
+   zodat het icoon zich onderscheidt van de gedempte sectie-iconen erboven. */
 .v2-rail-print {
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
-  color: var(--v2-grijs);
-  border: 1px solid var(--v2-lijn);
+  width: 40px;
+  height: 40px;
+  color: var(--v2-accent);
+  background: rgba(214, 34, 34, 0.14);
+  border: 1px solid rgba(214, 34, 34, 0.5);
   border-radius: 10px;
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 }
 
 .v2-rail-print svg {
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
 }
 
 .v2-rail-print:hover {
-  color: var(--v2-accent);
+  color: #ffffff;
+  background: var(--v2-accent);
   border-color: var(--v2-accent);
-  background: rgba(214, 34, 34, 0.1);
 }
 
 /* --------------------------------------------------------------------------- */
@@ -665,8 +668,15 @@ a {
     font-size: 46px;
   }
 
+  /* De naam blijft op één regel, maar schaalt mee met de schermbreedte: bij
+     38px vaste grootte duwde hij het hele venster breder dan de viewport. */
   .v2-naam {
-    font-size: 38px;
+    font-size: min(38px, 7.6vw);
+  }
+
+  .v2-foto-kaart {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .v2-duo,
@@ -681,6 +691,82 @@ a {
 
   .v2-kruimels span + span::before {
     display: none;
+  }
+
+  /* Niets mag de pagina breder maken dan het scherm. De projectkop stond als
+     flexrij naast een datum met nowrap; samen dwongen die een minimumbreedte
+     van 406px af, wat met de kolompadding op 454px uitkwam. */
+  .v2-window {
+    max-width: 100%;
+  }
+
+  .v2-rail,
+  .v2-foto,
+  .v2-kolom {
+    min-width: 0;
+  }
+
+  .v2-project-kop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+
+  .v2-meta {
+    white-space: normal;
+  }
+
+  /* Een enkel lang woord of een URL mag nooit de layout oprekken. */
+  .v2-tekst,
+  .v2-bullets li,
+  .v2-project-bedrijf,
+  .v2-contact li,
+  .v2-edu-opmerking {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Smalle telefoons: de rail en de titels schalen mee zodat ook 320px past. */
+@media (max-width: 430px) {
+  .v2-rail {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .v2-monogram {
+    font-size: 16px;
+  }
+
+  .v2-rail ul {
+    gap: 4px;
+  }
+
+  .v2-rail-knop {
+    width: 34px;
+    height: 34px;
+  }
+
+  .v2-rail-knop svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .v2-rail-print {
+    width: 36px;
+    height: 36px;
+  }
+
+  .v2-titel {
+    font-size: 38px;
+  }
+
+  .v2-kolom {
+    padding: 32px 18px 60px;
+  }
+
+  .v2-duo,
+  .v2-stats {
+    grid-template-columns: 1fr;
   }
 }
 
