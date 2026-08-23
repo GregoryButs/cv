@@ -9,6 +9,8 @@ import type { ReactNode } from 'react';
 export interface ProjectLink {
   label: string;
   url: string;
+  /** Tooltiptekst: vertelt wat de bezoeker achter de link vindt. */
+  titel: string;
 }
 
 /** Kerncijfers van een project — getoond als cijferstrook onder het project. */
@@ -98,9 +100,16 @@ export const PRIMARY_PROJECTS: Project[] = [
       </>,
     ],
     links: [
-      { label: '🌟 Showcase Case Study ↗', url: 'https://gregorybuts.github.io/de-verstandhouding-showcase/' },
-      { label: '🌐 deverstandhouding.be ↗', url: 'https://www.deverstandhouding.be' },
-      { label: '📁 GitHub Repository ↗', url: 'https://github.com/GregoryButs' },
+      {
+        label: '🌟 Showcase Case Study ↗',
+        url: 'https://gregorybuts.github.io/de-verstandhouding-showcase/',
+        titel: 'Case study van De Verstandhouding: architectuur, ontwerpkeuzes en resultaten',
+      },
+      {
+        label: '🌐 deverstandhouding.be ↗',
+        url: 'https://www.deverstandhouding.be',
+        titel: 'De live praktijkwebsite waarop het platform draait',
+      },
     ],
     stats: STATS,
   },
@@ -186,3 +195,12 @@ export const LOCATIE = 'Geraardsbergen, België';
 export const ROL = '.NET · ASP.NET Core Developer';
 export const BESCHIKBAARHEID = 'Onmiddellijk beschikbaar';
 export const SITE_URL = 'https://www.deverstandhouding.be';
+
+/** Tooltipteksten voor de vaste links, gedeeld door beide ontwerpen. */
+export const TOOLTIPS = {
+  email: `E-mail sturen naar ${EMAIL}`,
+  github: 'GitHub-profiel van Gregory Buts: broncode van de projecten',
+  showcase: 'Case study van De Verstandhouding: architectuur, ontwerpkeuzes en resultaten',
+  site: 'De live praktijkwebsite waarop het platform draait',
+  locatie: `Woonplaats: ${LOCATIE}`,
+} as const;

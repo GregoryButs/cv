@@ -14,6 +14,7 @@ import {
   SHOWCASE_URL,
   SKILLS,
   BESCHIKBAARHEID,
+  TOOLTIPS,
   type Experience,
   type Project,
 } from './cvData';
@@ -59,7 +60,14 @@ function ProjectCard({ project }: { project: Project }) {
       {project.links.length > 0 && (
         <div className="action-links-row">
           {project.links.map((link) => (
-            <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer" className="action-link">
+            <a
+              key={link.url}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="action-link"
+              title={link.titel}
+            >
               {link.label}
             </a>
           ))}
@@ -131,19 +139,27 @@ function PageOne() {
 
         <div className="contact-entry">
           <Mail strokeWidth={2} />
-          <a href="mailto:buts0038@gmail.com">buts0038@gmail.com</a>
+          <a href="mailto:buts0038@gmail.com" title={TOOLTIPS.email}>
+            buts0038@gmail.com
+          </a>
         </div>
 
         <div className="contact-entry">
           <Github strokeWidth={2} />
-          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" title={TOOLTIPS.github}>
             github.com/GregoryButs
           </a>
         </div>
 
         <div className="contact-entry">
           <ExternalLink strokeWidth={2} />
-          <a href={SHOWCASE_URL} target="_blank" rel="noopener noreferrer" className="showcase-highlight">
+          <a
+            href={SHOWCASE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="showcase-highlight"
+            title={TOOLTIPS.showcase}
+          >
             Showcase Case Study ↗
           </a>
         </div>
@@ -250,13 +266,13 @@ function PageTwo() {
             <div className="sidebar-portfolio-list">
               <div>
                 🌟 <strong>Case Study:</strong>{' '}
-                <a href={SHOWCASE_URL} target="_blank" rel="noopener noreferrer">
+                <a href={SHOWCASE_URL} target="_blank" rel="noopener noreferrer" title={TOOLTIPS.showcase}>
                   gregorybuts.github.io
                 </a>
               </div>
               <div>
                 📁 <strong>GitHub:</strong>{' '}
-                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" title={TOOLTIPS.github}>
                   github.com/GregoryButs
                 </a>
               </div>

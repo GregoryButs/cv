@@ -25,6 +25,7 @@ import {
   SECONDARY_PROJECTS,
   SHOWCASE_URL,
   SKILLS,
+  TOOLTIPS,
   type Project,
 } from '../cvData';
 import { MaskedPhone } from '../MaskedPhone';
@@ -92,7 +93,14 @@ function ProjectBlok({ project }: { project: Project }) {
       {project.links.length > 0 && (
         <div className="v2-knoppen">
           {project.links.map((link) => (
-            <a key={link.url} className="v2-knop" href={link.url} target="_blank" rel="noopener noreferrer">
+            <a
+              key={link.url}
+              className="v2-knop"
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={link.titel}
+            >
               {link.label.replace(/^[^\w]+\s*/, '').replace(' ↗', '')}
               <ArrowUpRight />
             </a>
@@ -121,7 +129,7 @@ export default function AppV2() {
                   type="button"
                   className={`v2-rail-knop${actieveSectie === id ? ' is-actief' : ''}`}
                   onClick={() => gaNaar(id)}
-                  title={label}
+                  title={`Ga naar ${label.toLowerCase()}`}
                   aria-label={label}
                   aria-current={actieveSectie === id ? 'true' : undefined}
                 >
@@ -156,13 +164,13 @@ export default function AppV2() {
             </h1>
             <p className="v2-rol">{ROL}</p>
             <div className="v2-sociaal">
-              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub">
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" title={TOOLTIPS.github} aria-label="GitHub">
                 <Github strokeWidth={1.8} />
               </a>
-              <a href={`mailto:${EMAIL}`} title="E-mail" aria-label="E-mail">
+              <a href={`mailto:${EMAIL}`} title={TOOLTIPS.email} aria-label="E-mail">
                 <Mail strokeWidth={1.8} />
               </a>
-              <a href={SHOWCASE_URL} target="_blank" rel="noopener noreferrer" title="Showcase" aria-label="Showcase">
+              <a href={SHOWCASE_URL} target="_blank" rel="noopener noreferrer" title={TOOLTIPS.showcase} aria-label="Showcase">
                 <ExternalLink strokeWidth={1.8} />
               </a>
             </div>
@@ -257,17 +265,19 @@ export default function AppV2() {
             <ul className="v2-contact">
               <li>
                 <Mail strokeWidth={1.7} />
-                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                <a href={`mailto:${EMAIL}`} title={TOOLTIPS.email}>
+                  {EMAIL}
+                </a>
               </li>
               <li>
                 <Github strokeWidth={1.7} />
-                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" title={TOOLTIPS.github}>
                   github.com/GregoryButs
                 </a>
               </li>
               <li>
                 <ExternalLink strokeWidth={1.7} />
-                <a href={SHOWCASE_URL} target="_blank" rel="noopener noreferrer">
+                <a href={SHOWCASE_URL} target="_blank" rel="noopener noreferrer" title={TOOLTIPS.showcase}>
                   Showcase case study
                 </a>
               </li>
