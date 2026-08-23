@@ -26,6 +26,10 @@ jobs:
           node-version: 22
           cache: npm
 
+      # Registreert de Pages-configuratie voor deze run. Zonder deze stap faalt
+      # de deploy als Pages nog niet op "GitHub Actions" stond toen de run begon.
+      - uses: actions/configure-pages@v5
+
       - name: Dependencies installeren
         run: npm ci
 
