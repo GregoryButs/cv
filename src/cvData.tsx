@@ -143,7 +143,7 @@ export const EXPERIENCES: Experience[] = [
 ];
 
 export const EDUCATION: Education[] = [
-  { degree: 'Graduaat Programmeren', period: '2023 — Heden (Verwacht: 2027)', school: 'Odisee Hogeschool (Full-Stack)' },
+  { degree: 'Graduaat Programmeren', period: '2023 — 2026/2027', school: 'Odisee Hogeschool (Full-Stack)' },
   { degree: 'Bachelor Criminologie', period: '2006 — 2012', school: 'Vrije Universiteit Brussel (VUB)' },
   { degree: 'ASO Latijn — Wiskunde/Talen', period: '1999 — 2005', school: 'Koninklijk Atheneum Halle' },
 ];
