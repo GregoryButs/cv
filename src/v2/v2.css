@@ -16,8 +16,8 @@
 
   --v2-wit: #ffffff;
   --v2-grijs: #8d8e8f;
-  --v2-accent: #d62222;
-  --v2-accent-fel: #f13a3a;
+  --v2-accent: #ff6d00;
+  --v2-accent-fel: #ff8c33;
 
   /* Verticaal ritme */
   --v2-ruimte-1: 10px;
@@ -140,7 +140,7 @@ a {
 
 .v2-rail-knop.is-actief {
   color: var(--v2-accent);
-  background: rgba(214, 34, 34, 0.14);
+  background: rgba(255, 109, 0, 0.14);
 }
 
  /* Geen navigatie maar een actie: daarom accentkleur en een gevulde achtergrond,
@@ -151,8 +151,8 @@ a {
   width: 44px;
   height: 44px;
   color: var(--v2-accent);
-  background: rgba(214, 34, 34, 0.14);
-  border: 1px solid rgba(214, 34, 34, 0.5);
+  background: rgba(255, 109, 0, 0.14);
+  border: 1px solid rgba(255, 109, 0, 0.5);
   border-radius: 10px;
   transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 }
@@ -216,24 +216,27 @@ a {
 
 .v2-naam {
   font-family: var(--v2-font-kop);
-  font-size: 40px;
+  font-size: 46px;
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.02em;
   white-space: nowrap; /* naam blijft op één regel */
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   color: var(--v2-wit);
 }
 
+/* De naam staat volledig in wit; het accent zit in de regel eronder. */
 .v2-naam span {
-  color: var(--v2-accent);
+  color: inherit;
 }
 
 .v2-rol {
-  margin: 0 0 18px;
-  font-size: 12.5px;
-  letter-spacing: 0.06em;
-  color: var(--v2-grijs);
+  margin: 0 0 20px;
+  font-family: var(--v2-font-kop);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: var(--v2-accent);
 }
 
 .v2-sociaal {
@@ -272,7 +275,7 @@ a {
   /* Inhoud vervaagt aan de randen in plaats van hard af te snijden. */
   mask-image: linear-gradient(to bottom, transparent 0, #000 34px, #000 calc(100% - 46px), transparent 100%);
   scrollbar-width: thin;
-  scrollbar-color: rgba(214, 34, 34, 0.55) transparent;
+  scrollbar-color: rgba(255, 109, 0, 0.55) transparent;
 }
 
 .v2-kolom::-webkit-scrollbar {
@@ -280,7 +283,7 @@ a {
 }
 
 .v2-kolom::-webkit-scrollbar-thumb {
-  background: rgba(214, 34, 34, 0.55);
+  background: rgba(255, 109, 0, 0.55);
   border-radius: 999px;
 }
 
@@ -565,7 +568,7 @@ a {
   position: absolute;
   inset: 0 auto 0 0;
   border-radius: 999px;
-  background: linear-gradient(90deg, #8f1717, var(--v2-accent));
+  background: linear-gradient(90deg, #a34600, var(--v2-accent));
 }
 
 .v2-talen {
@@ -682,7 +685,11 @@ a {
   /* De naam blijft op één regel, maar schaalt mee met de schermbreedte: bij
      38px vaste grootte duwde hij het hele venster breder dan de viewport. */
   .v2-naam {
-    font-size: min(38px, 7.6vw);
+    font-size: min(46px, 8.2vw);
+  }
+
+  .v2-rol {
+    font-size: 13.5px;
   }
 
   .v2-foto-kaart {
