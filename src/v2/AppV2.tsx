@@ -134,7 +134,7 @@ export default function AppV2() {
             {fotoMislukt ? (
               <User className="v2-foto-fallback" strokeWidth={1.2} />
             ) : (
-              <img src={`${import.meta.env.BASE_URL}avatar.jpg`} alt="Gregory Buts" onError={() => setFotoMislukt(true)} />
+              <img src={`${import.meta.env.BASE_URL}avatar-panel.jpg`} alt="Gregory Buts" onError={() => setFotoMislukt(true)} />
             )}
           </div>
 

@@ -183,18 +183,18 @@ a {
   position: absolute;
   inset: 0;
   display: grid;
-  place-items: end center;
+  place-items: center;
 }
 
-/* Uitgezoomd: de volledige breedte van de opname past in het paneel, met een
-   marge opzij. Onderaan verankerd zodat de extra ruimte bovenin valt en het
-   hemd volledig in beeld blijft. */
+/* De opname heeft zelf al ruimte rond het onderwerp, dus het paneel wordt
+   volledig gevuld. Voordeel tegenover een passende schaling: de kadrering is
+   identiek op elk schermformaat, want er blijft geen variabele zwartruimte over
+   wanneer het venster hoger of lager wordt. */
 .v2-foto-beeld img {
-  width: calc(100% - 36px);
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
-  object-position: bottom center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   filter: saturate(0.85) contrast(1.05);
 }
 
