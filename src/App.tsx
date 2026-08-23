@@ -298,8 +298,8 @@ export default function App() {
           <Printer strokeWidth={2} />
           <span>Opslaan als PDF</span>
         </button>
-        <a className="versie-link" href="./v2.html" title="Naar het donkere venster-ontwerp">
-          v2 ↗
+        <a className="versie-link" href="./" title="Terug naar de hoofdpagina">
+          ← Home
         </a>
       </div>
 

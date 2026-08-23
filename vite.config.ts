@@ -11,10 +11,10 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        // v1: het editorial ontwerp dat exact twee A4-pagina's print
+        // Hoofdpagina: het donkere venster-ontwerp (scherm-ervaring)
         main: resolve(__dirname, 'index.html'),
-        // v2: het donkere venster-ontwerp (scherm-ervaring)
-        v2: resolve(__dirname, 'v2.html'),
+        // Zusterpagina: het editorial ontwerp dat exact twee A4-pagina's print
+        print: resolve(__dirname, 'print.html'),
       },
     },
   },

@@ -1,17 +1,24 @@
 # CV — Gregory Buts
 
-Interactieve versie van mijn CV. React 19 + TypeScript + Vite, met een GSAP-openingssequentie
-en scroll-reveals. Print- en PDF-uitvoer is exact twee A4-pagina's.
+Mijn CV in twee ontwerpen, één codebase. React 19 + TypeScript + Vite met GSAP.
 
-**Live:** https://gregorybuts.github.io/cv/
+| Pagina | Ontwerp | Bedoeld voor |
+| --- | --- | --- |
+| [`/`](https://gregorybuts.github.io/cv/) | Donker venster met icoonrail en intern scrollende kolom | de link die ik deel |
+| [`/print.html`](https://gregorybuts.github.io/cv/print.html) | Licht editorial ontwerp | afdrukken — exact twee A4-pagina's |
+
+Het printer-icoon linksonder in de rail brengt je van de hoofdpagina naar de printbare versie.
 
 ## Opzet
 
 | Pad | Rol |
 | --- | --- |
-| `src/App.tsx` | Inhoud (typed arrays) en de twee A4-pagina's |
-| `src/index.css` | Volledige stylesheet, inclusief de strikte print-regels |
-| `src/useCvAnimations.ts` | GSAP-timeline en ScrollTrigger-reveals |
+| `src/cvData.tsx` | Alle inhoud — één bron voor beide ontwerpen |
+| `src/v2/AppV2.tsx` | Hoofdpagina: het venster-ontwerp |
+| `src/v2/useV2Animations.ts` | Intro, scroll-reveals en de actieve sectie in de rail |
+| `src/App.tsx` | Printbare versie: de twee A4-pagina's |
+| `src/index.css` | Stylesheet van de printbare versie, inclusief de strikte print-regels |
+| `src/useCvAnimations.ts` | GSAP-timeline van de printbare versie |
 
 Ontwerpkeuzes die de moeite waard zijn om te kennen:
 

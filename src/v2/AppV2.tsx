@@ -9,6 +9,7 @@ import {
   Mail,
   MapPin,
   Phone,
+  Printer,
   User,
 } from 'lucide-react';
 import {
@@ -117,8 +118,13 @@ export default function AppV2() {
               </li>
             ))}
           </ul>
-          <a className="v2-rail-versie" href="./index.html" title="Naar de printbare versie">
-            v1
+          <a
+            className="v2-rail-print"
+            href="./print.html"
+            title="Printbare versie (2 pagina's, klaar als PDF)"
+            aria-label="Printbare versie"
+          >
+            <Printer strokeWidth={1.6} />
           </a>
         </nav>
 
