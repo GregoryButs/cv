@@ -18,25 +18,61 @@ export function useV2Animations(kolom: RefObject<HTMLDivElement>) {
   const venster = useRef<HTMLDivElement>(null);
   const [actieveSectie, setActieveSectie] = useState('over');
 
-  // Actieve sectie in de rail: los van GSAP, dus ook zonder motion correct.
+  // Actieve sectie in de rail.
+  //
+  // Niet met een IntersectionObserver-drempel: secties zijn hier veel hoger dan
+  // het zichtbare deel van de kolom (projecten is ~1300px in een venster van
+  // 760px), waardoor zo'n sectie nooit een zichtbaarheidsdrempel haalt en het
+  // icoon dus nooit oplicht. In plaats daarvan één leeslijn op 30% van de
+  // hoogte: actief is de laatste sectie die daar voorbij is.
   useEffect(() => {
     const container = kolom.current;
     if (!container) return;
 
-    const secties = container.querySelectorAll<HTMLElement>('.v2-sectie');
-    const intern = container.scrollHeight > container.clientHeight + 10;
-    const waarnemer = new IntersectionObserver(
-      (entries) => {
-        const zichtbaar = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (zichtbaar?.target.id) setActieveSectie(zichtbaar.target.id);
-      },
-      { root: intern ? container : null, threshold: [0.25, 0.6], rootMargin: '-10% 0px -55% 0px' },
-    );
+    const secties = [...container.querySelectorAll<HTMLElement>('.v2-sectie')];
+    if (secties.length === 0) return;
 
-    secties.forEach((sectie) => waarnemer.observe(sectie));
-    return () => waarnemer.disconnect();
+    const internScrollend = () => container.scrollHeight > container.clientHeight + 10;
+    let frame = 0;
+
+    const bepaal = () => {
+      frame = 0;
+      const intern = internScrollend();
+      const grens = intern
+        ? container.getBoundingClientRect().top + container.clientHeight * 0.3
+        : window.innerHeight * 0.3;
+
+      const onderaan = intern
+        ? container.scrollTop + container.clientHeight >= container.scrollHeight - 4
+        : window.scrollY + window.innerHeight >= document.body.scrollHeight - 4;
+
+      if (onderaan) {
+        setActieveSectie(secties[secties.length - 1].id);
+        return;
+      }
+
+      let actief = secties[0];
+      for (const sectie of secties) {
+        if (sectie.getBoundingClientRect().top <= grens) actief = sectie;
+      }
+      setActieveSectie(actief.id);
+    };
+
+    const plan = () => {
+      if (!frame) frame = requestAnimationFrame(bepaal);
+    };
+
+    container.addEventListener('scroll', plan, { passive: true });
+    window.addEventListener('scroll', plan, { passive: true });
+    window.addEventListener('resize', plan);
+    bepaal();
+
+    return () => {
+      container.removeEventListener('scroll', plan);
+      window.removeEventListener('scroll', plan);
+      window.removeEventListener('resize', plan);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, [kolom]);
 
   const gaNaar = useCallback(
