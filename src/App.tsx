@@ -213,7 +213,7 @@ function PageOne() {
               API-ontwerp en EF Core-datamodellen tot authenticatie met Identity. Daarnaast breng ik bijna tien jaar mee
               als <strong>administratief manager en IT-coördinator</strong>: ik ken de kant van de organisatie die
               uiteindelijk met de software moet werken. Voor <em>De Verstandhouding</em> bouwde ik als lead architect een
-              live zorgplatform op DDD en CQRS, met 90%+ testdekking. Criminologie leerde me complexe systemen uit elkaar
+              live zorgplatform met gescheiden lees- en schrijfmodellen en 90%+ testdekking. Criminologie leerde me complexe systemen uit elkaar
               halen tot ze kloppen; die reflex gebruik ik nu in code, databases en architectuur.
             </p>
           </section>

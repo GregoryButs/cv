@@ -75,8 +75,8 @@ export const PRIMARY_PROJECTS: Project[] = [
       'Live zorgplatform voor eerstelijnspsychologische zorg: planning, digitaal patiëntendossier (SOEP) en facturatie in één geïntegreerd systeem.',
     bullets: [
       <>
-        Modulair platform ontworpen en gebouwd volgens <strong>Domain-Driven Design (DDD)</strong> en <strong>CQRS</strong>{' '}
-        met ontkoppelde C# controllers en services.
+        Modulair platform ontworpen en gebouwd met <strong>CQRS-scheiding tussen lees- en
+        schrijfmodellen</strong>, ontkoppelde C# controllers en services, en een expliciet gemodelleerd domein.
       </>,
       <>
         Atomaire beschikbaarheidsengine (<em>SlotCalculator</em>) met <strong>Lock-synchronisatie</strong>:
@@ -180,7 +180,7 @@ export const LANGUAGES = [
 ];
 
 export const FOCUS_AREAS: FocusArea[] = [
-  { title: 'Architectuur & Patterns', items: 'DDD, CQRS, Vertical Slice, REST API Design, Clean Architecture' },
+  { title: 'Architectuur & Patterns', items: 'CQRS-modelscheiding, domeingedreven modellering, REST API Design, Modular Monolith, ADR-praktijk' },
   { title: 'Kwaliteit & Security', items: 'TDD, xUnit (620+ tests), Concurrency Locks, AES-256 GCM, OWASP mitigatie' },
   { title: 'Databases & DevOps', items: 'SQL Server, PostgreSQL, EF Core 10, GitHub Actions CI/CD, Docker' },
 ];
