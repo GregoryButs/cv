@@ -21,8 +21,8 @@ export interface Stat {
 }
 
 export const STATS: Stat[] = [
-  { waarde: 423, label: 'xUnit-tests' },
-  { waarde: 177, label: 'Vitest-tests' },
+  { waarde: 624, label: 'xUnit-tests' },
+  { waarde: 370, label: 'Vitest-tests' },
   { waarde: 90, achtervoegsel: '%+', label: 'testdekking' },
   { waarde: 50, label: 'threads stress test' },
 ];
@@ -95,7 +95,7 @@ export const PRIMARY_PROJECTS: Project[] = [
         facturatie-export.
       </>,
       <>
-        <strong>90%+ geautomatiseerde testdekking</strong> (423 xUnit- en 177 Vitest-tests) in CI/CD pipeline met
+        <strong>90%+ geautomatiseerde testdekking</strong> (624 xUnit- en 370 Vitest-tests) in CI/CD pipeline met
         zero-downtime deployment.
       </>,
     ],
@@ -181,7 +181,7 @@ export const LANGUAGES = [
 
 export const FOCUS_AREAS: FocusArea[] = [
   { title: 'Architectuur & Patterns', items: 'DDD, CQRS, Vertical Slice, REST API Design, Clean Architecture' },
-  { title: 'Kwaliteit & Security', items: 'TDD, xUnit (420+ tests), Concurrency Locks, AES-256 GCM, OWASP mitigatie' },
+  { title: 'Kwaliteit & Security', items: 'TDD, xUnit (620+ tests), Concurrency Locks, AES-256 GCM, OWASP mitigatie' },
   { title: 'Databases & DevOps', items: 'SQL Server, PostgreSQL, EF Core 10, GitHub Actions CI/CD, Docker' },
 ];
 
