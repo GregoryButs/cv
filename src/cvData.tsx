@@ -21,7 +21,7 @@ export interface Stat {
 }
 
 export const STATS: Stat[] = [
-  { waarde: 624, label: 'xUnit-tests' },
+  { waarde: 627, label: 'xUnit-tests' },
   { waarde: 370, label: 'Vitest-tests' },
   { waarde: 90, achtervoegsel: '%+', label: 'testdekking' },
   { waarde: 50, label: 'threads stress test' },
@@ -95,7 +95,7 @@ export const PRIMARY_PROJECTS: Project[] = [
         facturatie-export.
       </>,
       <>
-        <strong>90%+ geautomatiseerde testdekking</strong> (624 xUnit- en 370 Vitest-tests) in CI/CD pipeline met
+        <strong>90%+ geautomatiseerde testdekking</strong> (627 xUnit- en 370 Vitest-tests) in CI/CD pipeline met
         zero-downtime deployment.
       </>,
     ],
