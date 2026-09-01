@@ -72,7 +72,7 @@ export const PRIMARY_PROJECTS: Project[] = [
     company: 'De Verstandhouding · Eerstelijnspsychologische Praktijk',
     stack: ['ASP.NET Core 10 LTS', 'C# 13', 'EF Core 10', 'React 19', 'TypeScript', 'Hangfire', 'HL7 FHIR R4'],
     description:
-      'Live zorgplatform voor eerstelijnspsychologische zorg: planning, digitaal patiëntendossier (SOEP) en facturatie in één geïntegreerd systeem.',
+      'Live zorgplatform voor eerstelijnspsychologische zorg: planning, digitaal patiëntendossier (SOEP) en ELP-sessieopvolging in één geïntegreerd systeem.',
     bullets: [
       <>
         Modulair platform ontworpen en gebouwd met <strong>CQRS-scheiding tussen lees- en
@@ -91,8 +91,8 @@ export const PRIMARY_PROJECTS: Project[] = [
         <strong>Hangfire</strong>.
       </>,
       <>
-        Belgische zorgwetgeving (ELP/RIZIV): geautomatiseerde opvolging van het 8-sessiescontingent met 1-click
-        facturatie-export.
+        Belgische zorgwetgeving (ELP/RIZIV): geautomatiseerde opvolging van het 8-sessiescontingent, met
+        export voor registratie in het eHealth/ELP-portaal.
       </>,
       <>
         <strong>90%+ geautomatiseerde testdekking</strong> (695 xUnit- en 372 Vitest-tests) in CI/CD pipeline met
