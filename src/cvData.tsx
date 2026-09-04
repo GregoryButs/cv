@@ -21,9 +21,9 @@ export interface Stat {
 }
 
 export const STATS: Stat[] = [
-  { waarde: 695, label: 'xUnit-tests' },
-  { waarde: 372, label: 'Vitest-tests' },
-  { waarde: 90, achtervoegsel: '%+', label: 'testdekking' },
+  { waarde: 812, label: 'xUnit-tests' },
+  { waarde: 406, label: 'Vitest-tests' },
+  { waarde: 92, achtervoegsel: '.5%', label: 'testdekking' },
   { waarde: 50, label: 'threads stress test' },
 ];
 
@@ -95,7 +95,7 @@ export const PRIMARY_PROJECTS: Project[] = [
         export voor registratie in het eHealth/ELP-portaal.
       </>,
       <>
-        <strong>90%+ geautomatiseerde testdekking</strong> (695 xUnit- en 372 Vitest-tests) in CI/CD pipeline met
+        <strong>92.5%+ geautomatiseerde testdekking</strong> (812 xUnit- en 406 Vitest-tests — 1.218 tests totaal) in CI/CD pipeline met
         zero-downtime deployment.
       </>,
     ],
@@ -181,7 +181,7 @@ export const LANGUAGES = [
 
 export const FOCUS_AREAS: FocusArea[] = [
   { title: 'Architectuur & Patterns', items: 'CQRS-modelscheiding, domeingedreven modellering, REST API Design, Modular Monolith, ADR-praktijk' },
-  { title: 'Kwaliteit & Security', items: 'TDD, xUnit (620+ tests), Concurrency Locks, AES-256 GCM, OWASP mitigatie' },
+  { title: 'Kwaliteit & Security', items: 'TDD, xUnit (810+ tests), Concurrency Locks, AES-256 GCM, OWASP mitigatie' },
   { title: 'Databases & DevOps', items: 'SQL Server, PostgreSQL, EF Core 10, GitHub Actions CI/CD, Docker' },
 ];
 
