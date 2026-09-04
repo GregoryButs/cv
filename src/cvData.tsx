@@ -23,7 +23,7 @@ export interface Stat {
 export const STATS: Stat[] = [
   { waarde: 812, label: 'xUnit-tests' },
   { waarde: 406, label: 'Vitest-tests' },
-  { waarde: 92, achtervoegsel: '.5%', label: 'testdekking' },
+  { waarde: 92, achtervoegsel: '.7%', label: 'testdekking' },
   { waarde: 50, label: 'threads stress test' },
 ];
 
