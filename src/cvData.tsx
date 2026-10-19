@@ -21,9 +21,9 @@ export interface Stat {
 }
 
 export const STATS: Stat[] = [
-  { waarde: 812, label: 'xUnit-tests' },
-  { waarde: 406, label: 'Vitest-tests' },
-  { waarde: 92, achtervoegsel: '.7%', label: 'testdekking' },
+  { waarde: 1248, label: 'xUnit-tests' },
+  { waarde: 580, label: 'Vitest-tests' },
+  { waarde: 94, achtervoegsel: ',2%', label: 'testdekking' },
   { waarde: 50, label: 'threads stress test' },
 ];
 
@@ -96,7 +96,7 @@ export const PRIMARY_PROJECTS: Project[] = [
         het eHealth/ELP-portaal.
       </>,
       <>
-        <strong>92,1% geautomatiseerde testdekking</strong> (1.064 xUnit- en 524 Vitest-tests — 1.588 tests totaal) in CI/CD pipeline met
+        <strong>92,1% geautomatiseerde testdekking</strong> (1248 xUnit- en 580 Vitest-tests — 1828 tests totaal) in CI/CD pipeline met
         zero-downtime deployment.
       </>,
     ],
